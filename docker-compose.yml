@@ -1,0 +1,16 @@
+services:
+  # front:
+  #   build: ./front
+  #   ports:
+  #     - '${NEXT_PORT}:${NEXT_PORT}'
+  #   depends_on:
+  #     - api
+
+  api:
+    build: ./back/api
+    ports:
+      - '${API_PORT}:${API_PORT}'
+    environment:
+      - API_PORT=${API_PORT}
+      - API_HOST=${API_HOST}
+    # depends_on: -db

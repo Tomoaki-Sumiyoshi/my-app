@@ -1,12 +1,14 @@
 import express from 'express';
+import { Express, Request, Response } from 'express';
 
-const app = express();
-const port = 3001;
+const app: Express = express();
+const port: number = Number(process.env.API_PORT) || 4000;
+const host: string = process.env.API_HOST || 'localhost';
 
-app.get('/', (_req, res) => {
+app.get('/', (_req: Request, res: Response) => {
   res.send('Hello');
 });
 
-app.listen(port, () => {
+app.listen(port, host, () => {
   console.log(`${port}called`);
 });
