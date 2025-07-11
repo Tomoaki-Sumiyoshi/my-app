@@ -1,5 +1,5 @@
 # 外部イメージをbaseステージとして扱う
-FROM node:18-alpine AS base
+FROM node AS base
 
 # baseステージをもとにbuilderステージを開始
 FROM base AS builder

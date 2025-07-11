@@ -9,4 +9,4 @@ COPY . .
 
 EXPOSE ${API_PORT}
 
-CMD ["npm","run", "start"]
+CMD ["npm", "run", "start"]
