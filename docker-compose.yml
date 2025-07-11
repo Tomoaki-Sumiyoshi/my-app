@@ -13,4 +13,21 @@ services:
     environment:
       - API_PORT=${API_PORT}
       - API_HOST=${API_HOST}
-    # depends_on: -db
+  # depends_on: -db
+
+  db:
+    image: postgres:16-alpine
+    container_name: sample-db
+    restart: always
+    ports:
+      - '${POSTGRES_PORT}:${POSTGRES_PORT}'
+    volumes:
+      - db:/var/lib/postgresql/data
+      - ./db/init:/docker-entrypoint-initdb.d
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+
+volumes:
+  db:
