@@ -1,8 +1,11 @@
--- テーブル作成
-CREATE TABLE my_table (
-    id serial PRIMARY KEY,
-    name VARCHAR (100) NOT NULL
-);
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
--- サンプルデータの登録
-INSERT INTO my_table (name) VALUES ('John Doe');
+-- テーブル作成
+CREATE TABLE messages (
+    message_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    user_id UUID DEFAULT uuid_generate_v4(),
+    message TEXT NOT NULL CHECK (char_length(trim(message)) > 0),
+    is_ai BOOLEAN DEFAULT false,
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+);
