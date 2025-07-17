@@ -1,15 +1,26 @@
 import { Response } from 'express';
 import { ZodSchema } from 'zod';
+import { SuccessResponseSchema, ErrorResponse } from '@packages/types/response';
 
-export const sendJson = <T>(
+export const sendJson = (
   res: Response,
   schema: ZodSchema,
   data: unknown,
   status: number = 200
 ) => {
-  const parsed = schema.safeParse(data);
+  const parsed = SuccessResponseSchema(schema).safeParse({
+    success: true,
+    data,
+  });
+
   if (!parsed.success) {
-    return res.status(500).json({ error: 'Invalid response structure' });
+    const errorResponse: ErrorResponse = {
+      success: false,
+      error: {
+        message: 'Invalid response structure',
+      },
+    };
+    return res.status(500).json(errorResponse);
   }
   return res.status(status).json(parsed.data);
 };

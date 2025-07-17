@@ -3,11 +3,12 @@ import {
   MessageSchema,
   Message,
 } from '@packages/types/messages';
+import { ApiResponseSchema, ApiResponse } from '@packages/types/response';
 
 export const postMessage = async (
   baseUrl: string,
   body: PostMessageBody
-): Promise<Message | undefined> => {
+): Promise<ApiResponse<Message>> => {
   const res = await fetch(`${baseUrl}/messages`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -15,8 +16,9 @@ export const postMessage = async (
   });
 
   const json = await res.json();
-  const result = MessageSchema.safeParse(json);
-  if (!result.success) return;
+  const result = ApiResponseSchema(MessageSchema).safeParse(json);
 
-  return result.data;
+  if (result.success) return result.data;
+
+  return { success: false, error: { message: 'Invalid response structure' } };
 };

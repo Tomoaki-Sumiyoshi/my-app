@@ -1,7 +1,6 @@
 'use client';
 import { useState, useRef, useEffect } from 'react';
-import ChatBubble from './components/ChatBubble';
-import ChatInput from './components/ChatInput';
+import { ChatBubble, ChatInput, ChatScrollContainer } from './components/Chat';
 import { Message, PostMessageBody } from '@packages/types/messages';
 import {
   getMessageList,
@@ -21,8 +20,10 @@ export default function Home() {
     setUserId(storageUserId);
 
     const request = async () => {
-      const res = await getMessageList(ApiUrl, {});
-      setMessages((prev) => [...prev, ...res]);
+      const res = await getMessageList(ApiUrl);
+      if (res.success) {
+        setMessages((prev) => [...prev, ...res.data]);
+      }
     };
     request();
   }, []);
@@ -38,17 +39,22 @@ export default function Home() {
     };
     const res = await postMessage(ApiUrl, body);
 
-    if (!res) return;
+    if (!res.success) return;
+    if (userId !== res.data.userId) {
+      localStorage.setItem('userId', res.data.userId);
+      setUserId(res.data.userId);
+    }
+    setMessages((prev) => [...prev, res.data]);
+  };
 
-    localStorage.setItem('userId', res.userId);
-    setUserId(res.userId);
-    setMessages((prev) => [...prev, res]);
+  const getOlderMessages = async () => {
+    console.log('called');
   };
 
   return (
     <div className="min-h-screen bg-gray-100 flex justify-center items-center">
       <div className="w-full max-w-md h-screen flex flex-col bg-white shadow-lg">
-        <div className="flex-1 overflow-y-auto p-4">
+        <ChatScrollContainer onReachTop={getOlderMessages}>
           {messages.map((msg) => (
             <ChatBubble
               key={msg.messageId}
@@ -56,8 +62,7 @@ export default function Home() {
               isMe={userId === msg.userId}
             />
           ))}
-          <div ref={bottomRef} />
-        </div>
+        </ChatScrollContainer>
         <ChatInput onSend={handleSend} />
       </div>
     </div>

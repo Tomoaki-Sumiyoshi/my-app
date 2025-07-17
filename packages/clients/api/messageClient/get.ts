@@ -3,19 +3,24 @@ import {
   MessageListSchema,
   Message,
 } from '@packages/types/messages';
+import { ApiResponseSchema, ApiResponse } from '@packages/types/response';
 
 export const getMessageList = async (
   baseUrl: string,
-  query: GetMessageQuery
-): Promise<Message[]> => {
+  query?: GetMessageQuery
+): Promise<ApiResponse<Message[]>> => {
   const url = new URL(`${baseUrl}/messages`);
-  Object.entries(query).forEach(([key, value]) => {
-    url.searchParams.append(key, value.toString());
-  });
+  if (query) {
+    Object.entries(query).forEach(([key, value]) => {
+      url.searchParams.append(key, value.toString());
+    });
+  }
 
   const res = await fetch(url);
   const json = await res.json();
-  const result = MessageListSchema.safeParse(json);
+  const result = ApiResponseSchema(MessageListSchema).safeParse(json);
 
-  return result.success ? result.data : [];
+  if (result.success) return result.data;
+
+  return { success: false, error: { message: 'Invalid response structure' } };
 };

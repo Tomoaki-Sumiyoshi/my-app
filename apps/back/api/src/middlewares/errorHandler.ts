@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import { ErrorResponseSchema } from '@packages/types/response';
 
 export const errorHandler = (
   err: any,
@@ -6,6 +7,10 @@ export const errorHandler = (
   res: Response,
   next: NextFunction
 ) => {
-  console.error(err);
-  res.status(500).json({ error: 'Internal Server Error' });
+  const response = {
+    success: false,
+    error: { code: 500, message: 'Internal Server Error' },
+  };
+
+  res.status(500).json(ErrorResponseSchema.parse(response));
 };
