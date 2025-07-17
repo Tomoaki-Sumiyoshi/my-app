@@ -8,7 +8,6 @@ export const MessageSchemaRow = z
     message: z.string(),
     is_ai: z.boolean(),
     created_at: z.date().transform((d) => d.toISOString()),
-    updated_at: z.date().transform((d) => d.toISOString()),
   })
   .transform((val) => keyToCamelCase(val));
 
@@ -18,7 +17,6 @@ export const MessageSchema = z.object({
   message: z.string(),
   isAi: z.coerce.boolean(),
   createdAt: z.coerce.date(),
-  updatedAt: z.coerce.date(),
 });
 
 export const MessageListSchema = z.array(MessageSchema);
