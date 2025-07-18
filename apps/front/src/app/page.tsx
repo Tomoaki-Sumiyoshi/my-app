@@ -4,7 +4,7 @@ import ChatBubbleList from './components/Chat/ChatBubbleList';
 import { useMessages } from '@app/hooks/useMessages';
 
 export default function Home() {
-  const { messages, scrollRef, sendNewMessage, userId } = useMessages();
+  const { messages, userId, sendNewMessage, scrollRef } = useMessages();
 
   return (
     <div className="min-h-screen bg-gray-100 flex justify-center items-center">

@@ -1,5 +1,5 @@
 import {
-  GetMessageQuery,
+  GetMessageClientQuery,
   MessageListSchema,
   Message,
 } from '@packages/types/messages';
@@ -7,7 +7,7 @@ import { ApiResponseSchema, ApiResponse } from '@packages/types/response';
 
 export const getMessageList = async (
   baseUrl: string,
-  query?: GetMessageQuery
+  query?: GetMessageClientQuery
 ): Promise<ApiResponse<Message[]>> => {
   const url = new URL(`${baseUrl}/messages`);
   if (query) {

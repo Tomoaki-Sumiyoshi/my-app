@@ -1,9 +1,8 @@
-import { useRef, useEffect } from 'react';
-import { useAutoScroll } from './useAutoScroll';
+import { useRef, useEffect, useLayoutEffect, useState } from 'react';
 import { useMessagesList } from './useMessagesList';
-import { useScrollPosition } from './useScrollPosition';
-import { useScrollToBottom } from './useScrollToBottom';
+import { useScroll } from './useScroll';
 import { useUserId } from './useUserId';
+import { useMessagesChangeCallback } from './useMessagesChangeCallback';
 
 export const useMessages = () => {
   const baseUrl =
@@ -11,23 +10,39 @@ export const useMessages = () => {
 
   const [userId, setUserId] = useUserId();
   const scrollRef = useRef<HTMLDivElement>(null);
-  const scrollPosition = useScrollPosition(scrollRef);
+
+  const {
+    scrollPosition,
+    preserveTopOffset,
+    scrollAfterInitialize,
+    scrollAfterInfinitScroll,
+    scrollAfterSend,
+  } = useScroll(scrollRef);
 
   const {
     messages,
+    fetchInitialMessages,
     getOldMessages,
     sendNewMessage: rawSendNewMessage,
   } = useMessagesList(baseUrl, userId);
 
-  const scrollToBottom = useScrollToBottom(scrollRef);
-
-  useAutoScroll(scrollRef, messages, userId, scrollPosition);
+  const setCallbackRef = useMessagesChangeCallback(messages);
 
   useEffect(() => {
-    if (scrollPosition === 'top') getOldMessages();
+    setCallbackRef(scrollAfterInitialize);
+    fetchInitialMessages();
+  }, []);
+
+  useEffect(() => {
+    if (scrollPosition === 'top') {
+      preserveTopOffset();
+      setCallbackRef(scrollAfterInfinitScroll);
+      getOldMessages();
+    }
   }, [scrollPosition]);
 
   const sendNewMessage = async (text: string) => {
+    setCallbackRef(scrollAfterSend);
     const newUserId = await rawSendNewMessage(text);
     if (newUserId) setUserId(newUserId);
   };
@@ -36,9 +51,6 @@ export const useMessages = () => {
     messages,
     userId,
     sendNewMessage,
-    getOldMessages,
     scrollRef,
-    scrollPosition,
-    scrollToBottom,
   };
 };
