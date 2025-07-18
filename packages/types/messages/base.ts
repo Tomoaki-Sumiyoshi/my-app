@@ -16,7 +16,7 @@ export const MessageSchema = z.object({
   userId: z.string(),
   message: z.string(),
   isAi: z.coerce.boolean(),
-  createdAt: z.coerce.date(),
+  createdAt: z.string(),
 });
 
 export const MessageListSchema = z.array(MessageSchema);

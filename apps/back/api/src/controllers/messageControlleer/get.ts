@@ -1,13 +1,13 @@
 import { Request, Response } from 'express';
 import db from '../../db';
 import {
-  GetMessageQuery,
+  GetMessageServerQuery,
   GetMessageResponseSchema,
 } from '@packages/types/messages';
 import { sendJson } from '../../utils/sendJson';
 
 export const getMessageList = async (
-  req: Request<{}, {}, GetMessageQuery>,
+  req: Request<{}, {}, GetMessageServerQuery>,
   res: Response
 ) => {
   const { beforeAt, afterAt, limit } = req.query;
@@ -36,13 +36,20 @@ export const getMessageList = async (
     whereConditions.length > 0 ? `WHERE ${whereConditions.join(' AND')}` : '';
 
   const query = `
-    SELECT 
-      * 
-    FROM 
-      messages
-    ${whereClause}
+    WITH limited_messages AS (
+      SELECT 
+        * 
+      FROM 
+        messages
+      ${whereClause}
+      ORDER BY created_at DESC
+      ${limitClause}
+    )
+    SELECT
+      *
+    FROM
+      limited_messages
     ORDER BY created_at ASC
-    ${limitClause}
   `;
 
   const result = await db.query(query, values);
