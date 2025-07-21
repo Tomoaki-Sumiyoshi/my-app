@@ -24,7 +24,7 @@ const url = process.env.REDIS_URL || 'redis://localhost:6379';
 
 (async () => {
   const redis = await redisClient(url);
-  await redis.subscribe('chat:new-message', (message) => {
+  await redis.subscribe('chat:new-userId', (message) => {
     wss.clients.forEach((client) => {
       if (client.readyState === client.OPEN) {
         client.send(message);

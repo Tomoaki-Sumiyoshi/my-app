@@ -7,6 +7,9 @@ export const publish = async (data: unknown) => {
 
   if (parsed.success) {
     const redis = await redisClient(url);
-    await redis.publish('chat:new-message', parsed.data.userId);
+    await Promise.all([
+      redis.publish('chat:new-userId', parsed.data.userId),
+      redis.publish('chat:new-message', parsed.data.message),
+    ]);
   }
 };

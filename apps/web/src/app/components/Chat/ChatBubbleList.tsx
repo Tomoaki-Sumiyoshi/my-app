@@ -15,11 +15,7 @@ const ChatBubbleList: React.FC<ChatBubbleListProps> = ({
   return (
     <>
       {messages.map((msg) => (
-        <ChatBubble
-          key={msg.messageId}
-          message={msg.message}
-          isMe={userId === msg.userId}
-        />
+        <ChatBubble key={msg.messageId} message={msg} userId={userId} />
       ))}
     </>
   );
