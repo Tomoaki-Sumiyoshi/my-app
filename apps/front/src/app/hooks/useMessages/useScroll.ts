@@ -7,7 +7,6 @@ export const useScroll = (
 ) => {
   const [scrollPosition, setScrollPosition] = useState<ScrollPosition>();
   const preScrollPositionRef = useRef<ScrollPosition>(null);
-  const prevOffsetRef = useRef<number>(null);
 
   useEffect(() => {
     const element = scrollRef.current;
@@ -45,38 +44,9 @@ export const useScroll = (
     });
   };
 
-  const scrollAfterInitialize = () => {
-    const element = scrollRef.current;
-    if (!element) return;
-    scrollTo(element.scrollHeight);
-  };
-
-  const scrollAfterSend = () => {
-    const element = scrollRef.current;
-    if (!element) return;
-    scrollTo(element.scrollHeight, true);
-  };
-
-  const scrollAfterInfinitScroll = () => {
-    const element = scrollRef.current;
-    const preOffset = prevOffsetRef.current;
-    if (!element || !preOffset) return;
-    const diff = element.scrollHeight - preOffset;
-
-    scrollTo(diff);
-  };
-
-  const preserveTopOffset = () => {
-    const element = scrollRef.current;
-    if (!element) return;
-    prevOffsetRef.current = element.scrollHeight;
-  };
-
   return {
     scrollPosition,
-    preserveTopOffset,
-    scrollAfterInitialize,
-    scrollAfterInfinitScroll,
-    scrollAfterSend,
+    setScrollPosition,
+    scrollTo,
   };
 };

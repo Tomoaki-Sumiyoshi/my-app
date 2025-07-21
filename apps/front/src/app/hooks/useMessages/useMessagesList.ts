@@ -4,7 +4,7 @@ import {
   postMessage,
 } from '@packages/client/api/messageClient';
 import { Message, PostMessageBody } from '@packages/types/messages';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export const useMessagesList = (baseUrl: string, userId: string | null) => {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -26,6 +26,18 @@ export const useMessagesList = (baseUrl: string, userId: string | null) => {
     }
   };
 
+  const getNewMessages = async () => {
+    const res = await getMessageList(baseUrl, {
+      limit: 10,
+      ...(messages.length > 0 && {
+        afterAt: messages[messages.length - 1].createdAt,
+      }),
+    });
+    if (res.success) {
+      setMessages((prev) => mergeUniqueMessages(prev, res.data));
+    }
+  };
+
   const sendNewMessage = async (text: string) => {
     const body: PostMessageBody = {
       message: text,
@@ -37,10 +49,14 @@ export const useMessagesList = (baseUrl: string, userId: string | null) => {
     return res.data.userId;
   };
 
+  useEffect(() => {
+    fetchInitialMessages();
+  }, []);
+
   return {
     messages,
-    fetchInitialMessages,
     getOldMessages,
+    getNewMessages,
     sendNewMessage,
   };
 };

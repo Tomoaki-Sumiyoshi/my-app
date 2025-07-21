@@ -5,6 +5,7 @@ import {
   PostMessageResponseSchema,
 } from '@packages/types/messages';
 import { sendJson } from '../../utils/sendJson';
+import { publish } from '../../utils/publish';
 
 export const postMessage = async (
   req: Request<{}, {}, PostMessageBody>,
@@ -30,5 +31,6 @@ export const postMessage = async (
   `;
 
   const result = await db.query(query, values);
+  await publish(result.rows[0]);
   return sendJson(res, PostMessageResponseSchema, result.rows[0]);
 };
