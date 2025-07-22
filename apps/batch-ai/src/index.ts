@@ -1,9 +1,12 @@
 import { redisClient } from '@packages/servers/redis';
-import 'dotenv/config';
 import { shouldTriggerByLength } from './utils/shouldTriggerByLength';
 import { callOpenAI, makeMessageParams } from './openAi';
 import { insertMessage } from './controllers/insert';
 import { publish } from './utils/publish';
+
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
 
 const url = process.env.REDIS_URL || 'redis://localhost:6379';
 

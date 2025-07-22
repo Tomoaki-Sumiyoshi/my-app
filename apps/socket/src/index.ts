@@ -1,7 +1,10 @@
 import { createServer } from 'http';
 import { WebSocketServer } from 'ws';
 import { redisClient } from '@packages/servers/redis';
-import 'dotenv/config';
+
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
 
 const server = createServer();
 const wss = new WebSocketServer({ server });

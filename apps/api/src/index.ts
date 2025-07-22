@@ -3,7 +3,10 @@ import cors from 'cors';
 import { Express, Request, Response } from 'express';
 import messageRouter from './routes/messageRoutes';
 import { errorHandler } from './middlewares/errorHandler';
-import 'dotenv/config';
+
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
 
 const app: Express = express();
 const port: number = Number(process.env.PORT) || 3001;
