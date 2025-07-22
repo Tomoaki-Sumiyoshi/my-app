@@ -24,7 +24,7 @@ export const useMessages = () => {
   } = useMessagesList(apiUrl, userId);
 
   const socketUrl = process.env.NEXT_PUBLIC_SOCKET_URL ?? 'ws://localhost:3002';
-  const { isConnected } = useWebSockt({
+  useWebSockt({
     url: socketUrl,
     onMessage(data) {
       if (data !== userId) {
@@ -48,9 +48,8 @@ export const useMessages = () => {
     ) {
       scrollTo(element.scrollTop + diff);
     } else if (
-      scrollPosition === 'bottom' &&
       messages[messages.length - 1].messageId !==
-        prevMessages[prevMessages.length - 1].messageId
+      prevMessages[prevMessages.length - 1].messageId
     ) {
       scrollTo(element.scrollHeight, true);
     }
@@ -65,7 +64,6 @@ export const useMessages = () => {
   }, [scrollPosition]);
 
   const sendNewMessage = async (text: string) => {
-    setScrollPosition('bottom');
     const newUserId = await rawSendNewMessage(text);
     if (newUserId) setUserId(newUserId);
   };

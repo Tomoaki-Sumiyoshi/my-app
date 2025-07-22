@@ -7,8 +7,9 @@ type Props = {
 
 const ChatInput: React.FC<Props> = ({ onSend }) => {
   const [input, setInput] = useState('');
+  const [disabled, setDisabled] = useState(true);
   const enableButtonClass = 'bg-blue-500 cursor-pointer hover:bg-blue-600';
-  // const disableButtonClass = 'bg-gray-400';
+  const disableButtonClass = 'bg-gray-400';
 
   const handleSend = () => {
     if (input.trim() === '') return;
@@ -23,12 +24,19 @@ const ChatInput: React.FC<Props> = ({ onSend }) => {
         className="flex-1 border rounded-full px-4 py-2 mr-2 text-sm focus:outline-none"
         placeholder="メッセージを入力"
         value={input}
-        onChange={(e) => setInput(e.target.value)}
+        onChange={(e) => {
+          const text = e.target.value;
+          setInput(text);
+          setDisabled(text.trim() === '');
+        }}
         onKeyDown={(e) => e.key === 'Enter' && handleSend()}
       />
       <button
-        className={`${enableButtonClass} text-white px-4 py-2 rounded-full text-sm`}
+        className={`${
+          disabled ? disableButtonClass : enableButtonClass
+        } text-white px-4 py-2 rounded-full text-sm`}
         onClick={handleSend}
+        disabled={disabled}
       >
         送信
       </button>

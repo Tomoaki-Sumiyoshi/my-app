@@ -1,13 +1,11 @@
 import { redisClient } from '@packages/servers/redis';
-import dotenv from 'dotenv';
+import 'dotenv/config';
 import { shouldTriggerByLength } from './utils/shouldTriggerByLength';
 import { callOpenAI, makeMessageParams } from './openAi';
 import { insertMessage } from './controllers/insert';
 import { publish } from './utils/publish';
 
 const url = process.env.REDIS_URL || 'redis://localhost:6379';
-
-dotenv.config();
 
 const main = async () => {
   let messageList: string[] = [];

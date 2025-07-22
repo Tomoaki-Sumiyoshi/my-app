@@ -13,7 +13,7 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({ message, userId }) => {
   return (
     <div className={`flex ${isMe ? 'justify-end' : 'justify-start'} mb-2`}>
       <div
-        className={`max-w-xs md:max-w-md px-4 py-2 rounded-lg text-white text-sm
+        className={`max-w-[80%] px-4 py-2 rounded-lg text-white text-sm break-words
           ${
             message.isAi
               ? 'bg-red-400 rounded-bl-none'
