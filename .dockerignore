@@ -1,0 +1,21 @@
+# キャッシュ系
+.cache
+turbo
+*.log
+
+# 環境変数ファイル
+.env
+.env.*  # .env.production なども除外
+
+# 実行時に不要な生成物（ビルド成果物はDocker内で生成するのでOK）
+**/dist
+**/build
+
+# node_modules（全てのワークスペースで除外）
+node_modules
+**/node_modules
+
+# macOS・VSCode等の不要ファイル
+.DS_Store
+.vscode
+.idea

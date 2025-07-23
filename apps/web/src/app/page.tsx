@@ -1,7 +1,10 @@
 'use client';
-import { ChatScrollContainer, ChatInput } from './components/Chat';
-import ChatBubbleList from './components/Chat/ChatBubbleList';
-import { useMessages } from '@app/hooks/useMessages';
+import {
+  ChatScrollContainer,
+  ChatInput,
+  ChatBubbleList,
+} from './components/Chat';
+import { useMessages } from '@web/app/hooks/useMessages';
 
 export default function Home() {
   const { messages, userId, sendNewMessage, scrollRef } = useMessages();

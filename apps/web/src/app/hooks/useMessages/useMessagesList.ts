@@ -1,8 +1,8 @@
-import { mergeUniqueMessages } from '@app/utils/array';
+import { mergeUniqueMessages } from '@web/app/utils/array';
 import {
   getMessageList,
   postMessage,
-} from '@packages/client/api/messageClient';
+} from '@packages/clients/api/messageClient';
 import { Message, PostMessageBody } from '@packages/types/messages';
 import { useEffect, useState } from 'react';
 

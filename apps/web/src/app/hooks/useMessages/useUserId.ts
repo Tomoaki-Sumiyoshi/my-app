@@ -1,4 +1,4 @@
-import { getStoredUserId, storeUserId } from '@app/libs/localStrage';
+import { getStoredUserId, storeUserId } from '@web/app/libs/localStrage';
 import { useEffect, useRef, useState } from 'react';
 
 export const useUserId = () => {
