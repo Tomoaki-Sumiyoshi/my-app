@@ -1,0 +1,22 @@
+{
+  "name": "prisma-client",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "prisma": {
+    "schema": "prisma/schema.prisma"
+  },
+  "scripts": {
+    "build": "tsc --build",
+    "generate": "prisma generate",
+    "migrate": "prisma migrate dev"
+  },
+  "devDependencies": {
+    "prisma": "^6.12.0",
+    "typescript": "*",
+    "zod-prisma": "^0.5.4"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.12.0"
+  }
+}

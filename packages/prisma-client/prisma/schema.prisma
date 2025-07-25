@@ -1,0 +1,21 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator zod {
+  provider = "zod-prisma"
+  output   = "../../zod-schema/src/"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Message {
+  messageId String   @id @default(uuid()) @map("message_id")
+  userId    String   @default(uuid()) @map("user_id")
+  message   String
+  isAi      Boolean  @default(false) @map("is_ai")
+  createdAt DateTime @default(now()) @map("created_at")
+}

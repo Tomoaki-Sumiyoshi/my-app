@@ -1,0 +1,11 @@
+{
+  "files": [],
+  "references": [
+    { "path": "apps/api" },
+    { "path": "packages/prisma-client" },
+    { "path": "packages/zod-schema" }
+  ],
+  "compilerOptions": {
+    "composite": true
+  }
+}

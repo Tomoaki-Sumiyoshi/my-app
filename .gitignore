@@ -1,4 +1,45 @@
-node_modules
-.env*
-.turbo
-dist
+# Node modules
+node_modules/
+**/node_modules/
+
+#TypeScript
+/dist
+**/dist/
+*.tsbuildinfo
+
+#Logs
+Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+#OS & IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+#Environment files
+.env
+.env.local
+.env.*.local
+
+#Turbo / pnpm
+.turbo/
+.pnpm-store/
+.pnpm-debug.log
+.pnp.*
+.pnpmfile.js
+
+#Next.js
+.next/
+out/
+
+#Docker related
+docker-compose.override.yml
+
+#Othres
+.cache/
+coverage/

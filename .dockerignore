@@ -1,21 +1,37 @@
-# キャッシュ系
-.cache
-turbo
-*.log
-
-# 環境変数ファイル
-.env
-.env.*  # .env.production なども除外
-
-# 実行時に不要な生成物（ビルド成果物はDocker内で生成するのでOK）
-**/dist
-**/build
-
-# node_modules（全てのワークスペースで除外）
+# Node modules
 node_modules
 **/node_modules
 
-# macOS・VSCode等の不要ファイル
+#TypeScript
+/dist
+**/dist
+
+#OS & IDE
 .DS_Store
 .vscode
 .idea
+
+#Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+
+#Git
+.git
+.gitignore
+
+#Environment files
+.env
+.env.local
+.env.*.local
+
+#Turbo / pnpm
+.turbo
+.pnpm-store
+
+#Docker related
+docker-compose.override.yml
+
+#Othres
+.cache/
+coverage/

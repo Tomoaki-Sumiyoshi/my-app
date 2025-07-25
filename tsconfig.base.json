@@ -1,23 +1,17 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "module": "CommonJS",
-    "lib": ["ES2020"],
+    "target": "ES2022",
+    "module": "ESNext",
     "moduleResolution": "Node",
+    "jsx": "preserve",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true,
     "baseUrl": ".",
     "paths": {
-      "@web/*": ["apps/web/src/*"],
-      "@packages/types/*": ["packages/types/*"],
-      "@packages/clients/*": ["packages/clients/*"],
-      "@packages/servers/*": ["packages/servers/*"],
-      "@packages/utils/*": ["packages/utils/*"]
+      "prisma-client": ["packages/prisma-client/src"],
+      "zod-schema": ["packages/zod-schema/src"]
     }
-  },
-  "exclude": ["node_modules", "dist"]
+  }
 }
