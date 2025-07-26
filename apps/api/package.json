@@ -21,7 +21,6 @@
     "express": "^5.1.0",
     "prisma-client": "workspace:*",
     "zod-schema-error": "workspace:*",
-    "zod-schema-prisma": "workspace:*",
     "zod-schema-request": "workspace:*",
     "zod-schema-response": "workspace:*"
   }

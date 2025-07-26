@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { parseMessageSchema, stringifyMessageSchema } from './serializer';
+import { parseMessageSchema, stringifyMessageSchema } from './serializer.js';
 
 export const sendSuccessResponseSchema = z.object({
   success: z.literal(true),

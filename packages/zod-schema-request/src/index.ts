@@ -1,2 +1,2 @@
-export * from './body';
-export * from './query';
+export * from './body.js';
+export * from './query.js';

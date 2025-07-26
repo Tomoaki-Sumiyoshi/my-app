@@ -1,8 +1,8 @@
 import cors from 'cors';
 import express, { Express, Request, Response } from 'express';
 
-import { errorHandler } from './middlewares/error-handler';
-import messageRouter from './routes';
+import { errorHandler } from './middlewares/error-handler.js';
+import messageRouter from './routes/index.js';
 
 const app: Express = express();
 const port: number = Number(process.env.API_PORT) || 3001;

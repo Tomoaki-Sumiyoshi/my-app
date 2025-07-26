@@ -1,11 +1,11 @@
 import { z } from 'zod';
 
-import { failureResponseSchema } from './failure-response';
-import { Message, StringifyMessage } from './serializer';
+import { failureResponseSchema } from './failure-response.js';
+import { Message, StringifyMessage } from './serializer.js';
 import {
   receiveSuccessResponseSchema,
   sendSuccessResponseSchema,
-} from './success-response';
+} from './success-response.js';
 
 export const sendApiResponseSchema = z.discriminatedUnion('success', [
   failureResponseSchema,

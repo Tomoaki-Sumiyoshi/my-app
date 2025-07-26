@@ -1,3 +1,3 @@
-export * from './error';
-export * from './error-code';
-export * from './error-map';
+export * from './error.js';
+export * from './error-code.js';
+export * from './error-map.js';

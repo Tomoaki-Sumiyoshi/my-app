@@ -5,8 +5,8 @@ import {
   receiveApiResponseSchema,
   SendApiResponse,
   sendApiResponseSchema,
-} from './api-response';
-import { Message } from './serializer';
+} from './api-response.js';
+import { Message } from './serializer.js';
 
 export const makeSendApiResponse = (
   message: Message | Message[]

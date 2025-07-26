@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { errorCodeSchema } from './error-code';
+import { errorCodeSchema } from './error-code.js';
 
 export const errorSchema = z.object({
   code: errorCodeSchema,

@@ -1,5 +1,5 @@
-import { ErrorType } from './error';
-import { ErrorCode } from './error-code';
+import { ErrorType } from './error.js';
+import { ErrorCode } from './error-code.js';
 
 export const errorMap: Record<ErrorCode, ErrorType> = {
   REQUIRED: {
