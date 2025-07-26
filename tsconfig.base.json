@@ -11,7 +11,10 @@
     "baseUrl": ".",
     "paths": {
       "prisma-client": ["packages/prisma-client/src"],
-      "zod-schema": ["packages/zod-schema/src"]
+      "zod-schema-prisma": ["packages/zod-schema-prisma/src"],
+      "zod-schema-error": ["packages/zod-schema-error/src"],
+      "zod-schema-response": ["packages/zod-schema-response/src"],
+      "zod-schema-request": ["packages/zod-schema-request/src"]
     }
   }
 }

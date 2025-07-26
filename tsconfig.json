@@ -3,7 +3,10 @@
   "references": [
     { "path": "apps/api" },
     { "path": "packages/prisma-client" },
-    { "path": "packages/zod-schema" }
+    { "path": "packages/zod-schema-error" },
+    { "path": "packages/zod-schema-prisma" },
+    { "path": "packages/zod-schema-request" },
+    { "path": "packages/zod-schema-response" }
   ],
   "compilerOptions": {
     "composite": true

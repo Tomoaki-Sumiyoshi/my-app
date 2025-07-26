@@ -9,10 +9,13 @@
     "start": "node dist/index.js"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
     "ts-node": "*",
     "typescript": "*"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^5.1.0",
     "prisma-client": "workspace:*"
   }

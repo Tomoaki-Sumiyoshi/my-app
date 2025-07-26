@@ -4,7 +4,7 @@ generator client {
 
 generator zod {
   provider = "zod-prisma"
-  output   = "../../zod-schema/src/"
+  output   = "../../zod-schema-prisma/src/"
 }
 
 datasource db {
@@ -15,7 +15,7 @@ datasource db {
 model Message {
   messageId String   @id @default(uuid()) @map("message_id")
   userId    String   @default(uuid()) @map("user_id")
-  message   String
+  content   String
   isAi      Boolean  @default(false) @map("is_ai")
   createdAt DateTime @default(now()) @map("created_at")
 }
