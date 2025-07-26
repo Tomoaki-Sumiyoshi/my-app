@@ -2,9 +2,10 @@
   "name": "api",
   "version": "1.0.0",
   "main": "dist/index.js",
+  "type": "module",
   "types": "dist/index.d.ts",
   "scripts": {
-    "dev": "ts-node src/index.ts",
+    "dev": "tsx src/index.ts",
     "build": "tsc --build",
     "start": "node dist/index.js"
   },
@@ -12,12 +13,16 @@
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
     "ts-node": "*",
+    "tsx": "^4.20.3",
     "typescript": "*"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "prisma-client": "workspace:*",
-    "zod-schema": "workspace:*"
+    "zod-schema-error": "workspace:*",
+    "zod-schema-prisma": "workspace:*",
+    "zod-schema-request": "workspace:*",
+    "zod-schema-response": "workspace:*"
   }
 }
