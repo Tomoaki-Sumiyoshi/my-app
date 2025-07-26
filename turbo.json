@@ -5,13 +5,13 @@
       "outputs": []
     },
     "build": {
-      "dependsOn": ["^build", "^generate"],
+      "dependsOn": ["generate", "^build"],
       "outputs": ["dist/**"]
     },
     "dev": {
       "cache": false,
       "persistent": true,
-      "dependsOn": ["build"]
+      "dependsOn": ["^build"]
     },
     "start": {
       "dependsOn": ["build"]

@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "turbo run dev",
     "build": "turbo run build",
-    "start": "turbo run start"
+    "start": "turbo run start",
+    "generate": "turbo run generate"
   },
   "devDependencies": {
     "ts-node": "^10.9.2",
