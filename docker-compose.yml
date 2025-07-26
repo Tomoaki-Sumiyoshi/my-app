@@ -15,22 +15,22 @@ services:
   #   ports:
   #     - "${REDIS_PORT}:${REDIS_PORT}"
 
-  # api:
-  #   build:
-  #     context: .
-  #     dockerfile: apps/api/Dockerfile
-  #   ports:
-  #     - "${API_PORT}:${API_PORT}"
-  #   environment:
-  #     - NODE_ENV=${NODE_ENV}
-  #     - POSTGRES_URL=${POSTGRES_URL}
-  #     - REDIS_URL=${REDIS_URL}
-  #     - API_PORT=${API_PORT}
-  #     - API_HOST=${API_HOST}
-  #     - CLIENT_ORIGIN=${CLIENT_ORIGIN}
-  #   depends_on:
-  #     - postgres
-  #     - redis
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    ports:
+      - "${API_PORT}:${API_PORT}"
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - POSTGRES_URL=${POSTGRES_URL}
+      - REDIS_URL=${REDIS_URL}
+      - API_PORT=${API_PORT}
+      - API_HOST=${API_HOST}
+      - CLIENT_ORIGIN=${CLIENT_ORIGIN}
+    # depends_on:
+    #   - postgres
+    #   - redis
 
   # socket:
   #   build:
