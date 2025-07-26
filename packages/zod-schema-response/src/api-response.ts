@@ -21,10 +21,8 @@ export type FailureResponse = z.infer<typeof failureResponseSchema>;
 
 export type ReceiveApiResponse =
   | FailureResponse
-  | { success: true; isArray: true; data: Message[] }
-  | { success: true; isArray: false; data: Message };
+  | { success: true; data: Message[] | Message };
 
 export type SendApiResponse =
   | FailureResponse
-  | { success: true; isArray: true; data: StringifyMessage[] }
-  | { success: true; isArray: false; data: StringifyMessage };
+  | { success: true; data: StringifyMessage[] | StringifyMessage };

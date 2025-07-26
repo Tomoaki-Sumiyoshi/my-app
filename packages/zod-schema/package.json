@@ -1,5 +1,5 @@
 {
-  "name": "zod-schema-request",
+  "name": "zod-schema",
   "version": "1.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "zod": "^4.0.10",
+    "zod-schema-prisma": "workspace:*",
     "zod-schema-error": "workspace:*",
+    "zod-schema-request": "workspace:*",
     "zod-schema-response": "workspace:*"
   }
 }

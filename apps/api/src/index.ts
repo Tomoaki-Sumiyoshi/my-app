@@ -1,6 +1,9 @@
 import cors from 'cors';
 import express, { Express, Request, Response } from 'express';
 
+import { errorHandler } from './middlewares/error-handler';
+import messageRouter from './routes';
+
 const app: Express = express();
 const port: number = Number(process.env.API_PORT) || 3001;
 const host: string = process.env.API_HOST || 'localhost';
@@ -20,8 +23,8 @@ app.use(
     },
   })
 );
-// app.use('/messages', messageRouter);
-// app.use(errorHandler);
+app.use('/messages', messageRouter);
+app.use(errorHandler);
 
 app.listen(port, host, () => {
   console.log(`${port}called`);

@@ -22,13 +22,13 @@ export const messageQuerySchema = z.object({
   beforeAt: z
     .string()
     .optional()
-    .transform((value) => (value ? new Date(value) : value)),
+    .transform((value) => (value ? new Date(value) : undefined)),
   afterAt: z
     .string()
     .optional()
-    .transform((value) => (value ? new Date(value) : value)),
+    .transform((value) => (value ? new Date(value) : undefined)),
   limit: z
     .string()
     .optional()
-    .transform((value) => (value ? Number(value) : value)),
+    .transform((value) => (value ? Number(value) : undefined)),
 });

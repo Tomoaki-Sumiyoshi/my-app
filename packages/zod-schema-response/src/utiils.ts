@@ -11,17 +11,10 @@ import { Message } from './serializer';
 export const makeSendApiResponse = (
   message: Message | Message[]
 ): SendApiResponse => {
-  const response: ReceiveApiResponse = Array.isArray(message)
-    ? {
-        success: true,
-        isArray: true,
-        data: message,
-      }
-    : {
-        success: true,
-        isArray: false,
-        data: message,
-      };
+  const response: ReceiveApiResponse = {
+    success: true,
+    data: message,
+  };
   const result = sendApiResponseSchema.safeParse(response);
 
   if (result.success) return result.data;

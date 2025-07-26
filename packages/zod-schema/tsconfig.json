@@ -1,7 +1,9 @@
 {
   "extends": "../../tsconfig.base.json",
   "references": [
+    { "path": "../../packages/zod-schema-prisma" },
     { "path": "../../packages/zod-schema-error" },
+    { "path": "../../packages/zod-schema-request" },
     { "path": "../../packages/zod-schema-response" }
   ],
   "compilerOptions": {

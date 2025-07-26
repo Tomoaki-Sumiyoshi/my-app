@@ -17,5 +17,5 @@ model Message {
   userId    String   @default(uuid()) @map("user_id")
   content   String
   isAi      Boolean  @default(false) @map("is_ai")
-  createdAt DateTime @default(now()) @map("created_at")
+  createdAt DateTime @unique @default(now()) @map("created_at")
 }
