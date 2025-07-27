@@ -21,7 +21,7 @@ if exist "%TURBOD_DIR%" (
   echo No turbod directory found in %TEMP%
 )
 
-:: node_modules と dist .turbo を再帰的に削除
+:: node_modules と dist .turbo .nextを再帰的に削除
 for /d /r %%d in (node_modules) do (
   if exist "%%d" (
     echo Removing %%d
@@ -35,6 +35,12 @@ for /d /r %%d in (dist) do (
   )
 )
 for /d /r %%d in (.turbo) do (
+  if exist "%%d" (
+    echo Removing %%d
+    rmdir /s /q "%%d"
+  )
+)
+for /d /r %%d in (.next) do (
   if exist "%%d" (
     echo Removing %%d
     rmdir /s /q "%%d"
@@ -59,8 +65,11 @@ echo.
 echo Installing dependencies...
 pnpm install
 
-echo Running generate...
-pnpm turbo run generate
+@REM echo Running generate...
+@REM pnpm turbo run generate
+
+@REM echo Installing dependencies...
+@REM pnpm install
 
 @REM echo Running build...
 @REM pnpm exec turbo run build

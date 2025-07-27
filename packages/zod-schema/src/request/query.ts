@@ -10,9 +10,9 @@ export const makeMessageQueryString = (query: MessageQuery): string => {
   const { beforeAt, afterAt, limit } = query;
 
   const queryString = new URLSearchParams({
-    ...(beforeAt && { beforeAt: query.beforeAt?.toISOString() }),
-    ...(afterAt && { afterAt: query.afterAt?.toISOString() }),
-    ...(limit && { limit: query.limit?.toString() }),
+    ...(beforeAt && { beforeAt: beforeAt.toISOString() }),
+    ...(afterAt && { afterAt: afterAt.toISOString() }),
+    ...(limit && { limit: limit.toString() }),
   }).toString();
 
   return queryString;
