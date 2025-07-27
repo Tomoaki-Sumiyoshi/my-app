@@ -1,7 +1,9 @@
 import { z } from 'zod';
 
+import { Message } from '@portfolio-chat/prisma-client';
+
 import { failureResponseSchema } from './failure-response.js';
-import { Message, StringifyMessage } from './serializer.js';
+import { StringifyMessage } from './serializer.js';
 import {
   receiveSuccessResponseSchema,
   sendSuccessResponseSchema,

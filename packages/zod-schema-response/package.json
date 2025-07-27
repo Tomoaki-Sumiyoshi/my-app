@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "zod": "^4.0.10",
-    "zod-schema-prisma": "workspace:*",
+    "@portfolio-chat/prisma-client": "workspace:*",
     "zod-schema-error": "workspace:*"
   }
 }

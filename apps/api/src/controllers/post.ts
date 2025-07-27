@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { prisma } from '@portfolio-chat/prisma-schema';
+import { prisma } from '@portfolio-chat/prisma-client';
 import { getSafeMessageBody, messageBodySchema } from 'zod-schema-request';
 import { makeSendApiResponse } from 'zod-schema-response';
 

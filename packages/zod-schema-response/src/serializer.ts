@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { MessageModel } from 'zod-schema-prisma';
 
 export const stringifyMessageSchema = z.object({
   messageId: z.string(),
@@ -17,7 +16,6 @@ export const parseMessageSchema = z.object({
   createdAt: z.string().transform((value) => new Date(value)),
 });
 
-export type Message = z.infer<typeof MessageModel>;
 export type StringifyMessage = {
   messageId: string;
   userId: string;

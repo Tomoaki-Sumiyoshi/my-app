@@ -19,7 +19,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^5.1.0",
-    "@portfolio-chat/prisma-schema": "workspace:*",
+    "@portfolio-chat/prisma-client": "workspace:*",
     "zod-schema-error": "workspace:*",
     "zod-schema-request": "workspace:*",
     "zod-schema-response": "workspace:*"

@@ -1,12 +1,13 @@
 import { errorMap } from 'zod-schema-error';
 
+import { Message } from '@portfolio-chat/prisma-client';
+
 import {
   ReceiveApiResponse,
   receiveApiResponseSchema,
   SendApiResponse,
   sendApiResponseSchema,
 } from './api-response.js';
-import { Message } from './serializer.js';
 
 export const makeSendApiResponse = (
   message: Message | Message[]
