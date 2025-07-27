@@ -1,8 +1,11 @@
 import { Request, Response } from 'express';
+
 import { prisma } from '@portfolio-chat/prisma-client';
-import { errorMap } from 'zod-schema-error';
-import { messageQuerySchema } from 'zod-schema-request';
-import { makeSendApiResponse } from 'zod-schema-response';
+import {
+  errorMap,
+  makeSendApiResponse,
+  messageQuerySchema,
+} from '@portfolio-chat/zod-schema';
 
 export const getMessageList = async (req: Request, res: Response) => {
   const query = messageQuerySchema.safeParse(req.query);

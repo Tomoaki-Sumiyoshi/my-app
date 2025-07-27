@@ -1,6 +1,6 @@
-import { Request, Response, NextFunction } from 'express';
-import { errorMap } from 'zod-schema-error';
-import { FailureResponse } from 'zod-schema-response';
+import { NextFunction, Request, Response } from 'express';
+
+import { errorMap, FailureResponse } from '@portfolio-chat/zod-schema';
 
 export const errorHandler = (
   err: any,

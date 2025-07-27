@@ -1,4 +1,4 @@
-import { errorMap } from 'zod-schema-error';
+import { errorMap } from '../error/index.js';
 
 import { Message } from '@portfolio-chat/prisma-client';
 

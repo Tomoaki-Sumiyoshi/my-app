@@ -1,5 +1,5 @@
 {
-  "name": "zod-schema-response",
+  "name": "@portfolio-chat/zod-schema",
   "version": "1.0.0",
   "main": "dist/index.js",
   "type": "module",
@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "zod": "^4.0.10",
-    "@portfolio-chat/prisma-client": "workspace:*",
-    "zod-schema-error": "workspace:*"
+    "@portfolio-chat/prisma-client": "workspace:*"
   }
 }

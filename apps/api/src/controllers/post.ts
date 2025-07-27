@@ -1,7 +1,10 @@
 import { Request, Response } from 'express';
+
 import { prisma } from '@portfolio-chat/prisma-client';
-import { getSafeMessageBody, messageBodySchema } from 'zod-schema-request';
-import { makeSendApiResponse } from 'zod-schema-response';
+import {
+  getSafeMessageBody,
+  makeSendApiResponse,
+} from '@portfolio-chat/zod-schema';
 
 export const postMessage = async (req: Request, res: Response) => {
   const body = getSafeMessageBody(req.body);

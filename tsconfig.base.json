@@ -12,9 +12,7 @@
     "paths": {
       "@portfolio-chat/prisma-client": ["packages/prisma-client/src"],
       "@portfolio-chat/prisma-schema": ["packages/prisma-schema/src"],
-      "zod-schema-error": ["packages/zod-schema-error/src"],
-      "zod-schema-response": ["packages/zod-schema-response/src"],
-      "zod-schema-request": ["packages/zod-schema-request/src"]
+      "@portfolio-chat/zod-schema": ["packages/zod-schema"]
     }
   }
 }

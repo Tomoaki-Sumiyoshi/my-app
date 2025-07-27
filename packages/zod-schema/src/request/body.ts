@@ -1,6 +1,7 @@
 import { z } from 'zod';
-import { errorMap, ErrorType } from 'zod-schema-error';
-import { FailureResponse } from 'zod-schema-response';
+
+import { errorMap, ErrorType } from '../error/index.js';
+import { FailureResponse } from '../response/index.js';
 
 const uuidV4Regex =
   /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;

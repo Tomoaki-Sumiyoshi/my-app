@@ -59,6 +59,9 @@ echo.
 echo Installing dependencies...
 pnpm install
 
+echo Running generate...
+pnpm turbo run generate
+
 @REM echo Running build...
 @REM pnpm exec turbo run build
 
