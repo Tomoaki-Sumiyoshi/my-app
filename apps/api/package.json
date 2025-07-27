@@ -14,12 +14,12 @@
     "@types/express": "^5.0.3",
     "ts-node": "*",
     "tsx": "^4.20.3",
-    "typescript": "*"
+    "typescript": "^5.8.3"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^5.1.0",
-    "prisma-client": "workspace:*",
+    "@portfolio-chat/prisma-schema": "workspace:*",
     "zod-schema-error": "workspace:*",
     "zod-schema-request": "workspace:*",
     "zod-schema-response": "workspace:*"

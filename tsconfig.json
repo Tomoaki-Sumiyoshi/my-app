@@ -2,7 +2,7 @@
   "files": [],
   "references": [
     { "path": "apps/api" },
-    { "path": "packages/prisma-client" },
+    { "path": "packages/prisma-schema" },
     { "path": "packages/zod-schema" },
     { "path": "packages/zod-schema-error" },
     { "path": "packages/zod-schema-prisma" },

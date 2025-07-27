@@ -1,5 +1,5 @@
 {
-  "name": "prisma-client",
+  "name": "@portfolio-chat/prisma-schema",
   "version": "1.0.0",
   "main": "dist/index.js",
   "type": "module",
@@ -9,12 +9,12 @@
   },
   "scripts": {
     "build": "tsc --build",
-    "generate": "prisma generate --no-engine",
+    "generate": "prisma generate",
     "migrate": "prisma migrate dev"
   },
   "devDependencies": {
     "prisma": "^6.12.0",
-    "typescript": "*",
+    "typescript": "^5.8.3",
     "zod-prisma": "^0.5.4"
   },
   "dependencies": {
