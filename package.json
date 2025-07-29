@@ -6,7 +6,9 @@
     "dev": "turbo run dev",
     "build": "turbo run build",
     "start": "turbo run start",
-    "generate": "turbo run generate"
+    "generate": "turbo run generate",
+    "clean": "npx del-cli \"**/dist\" \"**/.turbo\" \"**/node_modules\"",
+    "clean-install": "pnpm run clean && pnpm install --filter=@portfolio-chat/prisma-schema... && pnpm run generate && pnpm install"
   },
   "devDependencies": {
     "ts-node": "^10.9.2",
