@@ -11,7 +11,8 @@ import { useSocket } from '../../hooks/useSocket';
 export default function ChatPage() {
   useSocket();
   const { data } = useMessages();
-  const messages = data ?? [];
+
+  const messages = data?.pages.flat() ?? [];
   const onScroll = useScroll();
 
   const scrollToBottom = () => {

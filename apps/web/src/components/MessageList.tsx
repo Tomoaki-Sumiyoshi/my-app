@@ -9,7 +9,7 @@ export const MessageList = ({ messages }: Props) => {
   return (
     <>
       {messages.map((msg) => {
-        <MessageBubble key={msg.messageId} message={msg} />;
+        return <MessageBubble key={msg.messageId} message={msg} />;
       })}
     </>
   );

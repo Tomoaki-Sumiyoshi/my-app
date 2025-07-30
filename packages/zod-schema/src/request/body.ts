@@ -7,10 +7,7 @@ const uuidV4Regex =
   /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
 export const messageBodySchema = z.object({
-  userId: z
-    .string()
-    .regex(uuidV4Regex, { message: 'UUIDv4形式で入力してください' })
-    .optional(),
+  userId: z.string().optional(),
   content: z
     .string()
     .max(50, { message: '50文字以内で入力してください' })

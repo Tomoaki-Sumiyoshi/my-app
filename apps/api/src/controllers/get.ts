@@ -18,8 +18,8 @@ export const getMessageList = async (req: Request, res: Response) => {
   const messageList = await prisma.message.findMany({
     where: {
       createdAt: {
-        gte: beforeAt,
-        lte: afterAt,
+        lte: beforeAt,
+        gte: afterAt,
       },
     },
     take: limit,

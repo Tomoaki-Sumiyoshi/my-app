@@ -4,7 +4,7 @@ export const stringifyMessageSchema = z.object({
   messageId: z.string(),
   userId: z.string(),
   content: z.string(),
-  isAi: z.boolean().transform((value) => `{${value}}`),
+  isAi: z.boolean().transform((value) => `${value}`),
   createdAt: z.date().transform((value) => value.toISOString()),
 });
 

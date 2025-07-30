@@ -33,7 +33,6 @@ export const makeReceiveSingleApiResponse = (
   response: unknown
 ): ReceiveSingleApiResponse => {
   const result = receiveSingleApiResponseSchema.safeParse(response);
-
   if (result.success) return result.data;
 
   return {
