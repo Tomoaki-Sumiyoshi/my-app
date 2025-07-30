@@ -95,6 +95,25 @@ importers:
         specifier: ^5
         version: 5.8.3
 
+  packages/http-utils:
+    dependencies:
+      '@portfolio-chat/zod-schema':
+        specifier: workspace:*
+        version: link:../zod-schema
+      express:
+        specifier: ^5.1.0
+        version: 5.1.0
+      next:
+        specifier: 15.4.4
+        version: 15.4.4(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+    devDependencies:
+      '@types/express':
+        specifier: ^5.0.3
+        version: 5.0.3
+      typescript:
+        specifier: ^5.8.3
+        version: 5.8.3
+
   packages/prisma-client:
     devDependencies:
       typescript:

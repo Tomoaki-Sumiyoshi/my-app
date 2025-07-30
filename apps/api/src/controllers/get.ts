@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import { prisma } from '@portfolio-chat/prisma-client';
 import {
   errorMap,
-  makeSendApiResponse,
+  makeSendMultipleApiResponse,
   messageQuerySchema,
 } from '@portfolio-chat/zod-schema';
 
@@ -28,7 +28,7 @@ export const getMessageList = async (req: Request, res: Response) => {
     },
   });
 
-  const response = makeSendApiResponse(messageList);
+  const response = makeSendMultipleApiResponse(messageList);
   if (response.success) return res.status(200).json(response);
 
   return res.status(response.error.status).json(response);

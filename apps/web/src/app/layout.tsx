@@ -1,6 +1,6 @@
-import '@/app/globals.css';
+import './globals.css';
 
-import { Toaster } from 'react-hot-toast';
+import { Providers } from './providers';
 
 export const metadata = {
   title: 'Chat App',
@@ -15,8 +15,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body>
-        <Toaster position="top-right" />
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

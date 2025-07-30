@@ -1,22 +1,25 @@
-import { errorMap } from '../error/index.js';
-
 import { Message } from '@portfolio-chat/prisma-client';
 
+import { errorMap } from '../error/index.js';
 import {
-  ReceiveApiResponse,
-  receiveApiResponseSchema,
-  SendApiResponse,
-  sendApiResponseSchema,
+  ReceiveMultipleApiResponse,
+  receiveMultipleApiResponseSchema,
+  ReceiveSingleApiResponse,
+  receiveSingleApiResponseSchema,
+  SendMultipleApiResponse,
+  sendMultipleApiResponseSchema,
+  SendSingleApiResponse,
+  sendSingleApiResponseSchema,
 } from './api-response.js';
 
-export const makeSendApiResponse = (
-  message: Message | Message[]
-): SendApiResponse => {
-  const response: ReceiveApiResponse = {
+export const makeSendSingleApiResponse = (
+  message: Message
+): SendSingleApiResponse => {
+  const response: ReceiveSingleApiResponse = {
     success: true,
     data: message,
   };
-  const result = sendApiResponseSchema.safeParse(response);
+  const result = sendSingleApiResponseSchema.safeParse(response);
 
   if (result.success) return result.data;
 
@@ -26,10 +29,40 @@ export const makeSendApiResponse = (
   };
 };
 
-export const makeReceiveApiResponse = (
+export const makeReceiveSingleApiResponse = (
   response: unknown
-): ReceiveApiResponse => {
-  const result = receiveApiResponseSchema.safeParse(response);
+): ReceiveSingleApiResponse => {
+  const result = receiveSingleApiResponseSchema.safeParse(response);
+
+  if (result.success) return result.data;
+
+  return {
+    success: false,
+    error: errorMap.INVALID_TYPE,
+  };
+};
+
+export const makeSendMultipleApiResponse = (
+  message: Message[]
+): SendMultipleApiResponse => {
+  const response: ReceiveMultipleApiResponse = {
+    success: true,
+    data: message,
+  };
+  const result = sendMultipleApiResponseSchema.safeParse(response);
+
+  if (result.success) return result.data;
+
+  return {
+    success: false,
+    error: errorMap.INVALID_TYPE,
+  };
+};
+
+export const makeReceiveMultipleApiResponse = (
+  response: unknown
+): ReceiveMultipleApiResponse => {
+  const result = receiveMultipleApiResponseSchema.safeParse(response);
 
   if (result.success) return result.data;
 

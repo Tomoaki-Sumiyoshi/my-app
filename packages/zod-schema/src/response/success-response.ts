@@ -2,12 +2,22 @@ import { z } from 'zod';
 
 import { parseMessageSchema, stringifyMessageSchema } from './serializer.js';
 
-export const sendSuccessResponseSchema = z.object({
+export const sendSingleSuccessResponseSchema = z.object({
   success: z.literal(true),
-  data: z.union([z.array(stringifyMessageSchema), stringifyMessageSchema]),
+  data: stringifyMessageSchema,
 });
 
-export const receiveSuccessResponseSchema = z.object({
+export const receiveSingleSuccessResponseSchema = z.object({
   success: z.literal(true),
-  data: z.union([z.array(parseMessageSchema), parseMessageSchema]),
+  data: parseMessageSchema,
+});
+
+export const sendMultipleSuccessResponseSchema = z.object({
+  success: z.literal(true),
+  data: z.array(stringifyMessageSchema),
+});
+
+export const receiveMultipleSuccessResponseSchema = z.object({
+  success: z.literal(true),
+  data: z.array(parseMessageSchema),
 });

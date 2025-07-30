@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import { prisma } from '@portfolio-chat/prisma-client';
 import {
   getSafeMessageBody,
-  makeSendApiResponse,
+  makeSendSingleApiResponse,
 } from '@portfolio-chat/zod-schema';
 
 export const postMessage = async (req: Request, res: Response) => {
@@ -18,7 +18,7 @@ export const postMessage = async (req: Request, res: Response) => {
     },
   });
 
-  const response = makeSendApiResponse(message);
+  const response = makeSendSingleApiResponse(message);
   if (response.success) return res.status(200).json(response);
 
   return res.status(response.error.status).json(response);

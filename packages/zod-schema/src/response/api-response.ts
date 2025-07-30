@@ -5,26 +5,46 @@ import { Message } from '@portfolio-chat/prisma-client';
 import { failureResponseSchema } from './failure-response.js';
 import { StringifyMessage } from './serializer.js';
 import {
-  receiveSuccessResponseSchema,
-  sendSuccessResponseSchema,
+  sendMultipleSuccessResponseSchema,
+  sendSingleSuccessResponseSchema,
+  receiveMultipleSuccessResponseSchema,
+  receiveSingleSuccessResponseSchema,
 } from './success-response.js';
 
-export const sendApiResponseSchema = z.discriminatedUnion('success', [
+export const sendMultipleApiResponseSchema = z.discriminatedUnion('success', [
   failureResponseSchema,
-  sendSuccessResponseSchema,
+  sendMultipleSuccessResponseSchema,
 ]);
 
-export const receiveApiResponseSchema = z.discriminatedUnion('success', [
+export const receiveMultipleApiResponseSchema = z.discriminatedUnion(
+  'success',
+  [failureResponseSchema, receiveMultipleSuccessResponseSchema]
+);
+
+export const sendSingleApiResponseSchema = z.discriminatedUnion('success', [
   failureResponseSchema,
-  receiveSuccessResponseSchema,
+  sendSingleSuccessResponseSchema,
+]);
+
+export const receiveSingleApiResponseSchema = z.discriminatedUnion('success', [
+  failureResponseSchema,
+  receiveSingleSuccessResponseSchema,
 ]);
 
 export type FailureResponse = z.infer<typeof failureResponseSchema>;
 
-export type ReceiveApiResponse =
+export type ReceiveMultipleApiResponse =
   | FailureResponse
-  | { success: true; data: Message[] | Message };
+  | { success: true; data: Message[] };
 
-export type SendApiResponse =
+export type SendMultipleApiResponse =
   | FailureResponse
-  | { success: true; data: StringifyMessage[] | StringifyMessage };
+  | { success: true; data: StringifyMessage[] };
+
+export type ReceiveSingleApiResponse =
+  | FailureResponse
+  | { success: true; data: Message };
+
+export type SendSingleApiResponse =
+  | FailureResponse
+  | { success: true; data: StringifyMessage };
