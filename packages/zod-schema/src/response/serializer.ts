@@ -1,5 +1,13 @@
 import { z } from 'zod';
 
+export const rowMessageSchema = z.object({
+  messageId: z.string(),
+  userId: z.string(),
+  content: z.string(),
+  isAi: z.boolean(),
+  createdAt: z.date(),
+});
+
 export const stringifyMessageSchema = z.object({
   messageId: z.string(),
   userId: z.string(),

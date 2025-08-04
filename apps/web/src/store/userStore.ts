@@ -1,22 +1,15 @@
+import { RefObject, useRef } from 'react';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-type MessageState = {
-  isAtBottom: boolean;
-  setIsAtBottom: (isAtBottom: boolean) => void;
-  socketConnected: boolean;
-  setSocketConnected: (socketConnected: boolean) => void;
+type UserState = {
   userId: string;
   setUserId: (userId: string) => void;
 };
 
-export const useMessageStore = create<MessageState>()(
+export const useUserStore = create<UserState>()(
   persist(
     (set) => ({
-      isAtBottom: true,
-      setIsAtBottom: (isAtBottom) => set({ isAtBottom }),
-      socketConnected: false,
-      setSocketConnected: (socketConnected) => set({ socketConnected }),
       userId: '',
       setUserId: (userId) => set({ userId }),
     }),

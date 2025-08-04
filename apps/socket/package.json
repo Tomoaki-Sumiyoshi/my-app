@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@portfolio-chat/redis-client": "workspace:*",
+    "@portfolio-chat/zod-schema": "workspace:*",
     "ws": "^8.18.3"
   }
 }

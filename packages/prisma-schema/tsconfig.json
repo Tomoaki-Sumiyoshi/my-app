@@ -1,9 +1,13 @@
 {
   "extends": "../../tsconfig.base.json",
+  "references": [
+    { "path": "../../packages/prisma-client" },
+    { "path": "../../packages/zod-schema" }
+  ],
   "compilerOptions": {
     "outDir": "dist",
     "rootDir": "src",
     "composite": true
   },
-  "include": []
+  "include": ["src"]
 }

@@ -1,12 +1,14 @@
+'use client';
+
 import { useState } from 'react';
 
-import { useSendMessage } from '../hooks/useSendMessage';
-import { useMessageStore } from '../store/messageStore';
+import { useSendMessage } from '../../hooks/useSendMessage';
+import { useConnectionStore } from '../../store/connectionStore';
 
 export const ChatInput = () => {
   const [text, setText] = useState('');
   const sendMessage = useSendMessage();
-  const { socketConnected } = useMessageStore();
+  const { socketConnected } = useConnectionStore();
 
   const onSend = async () => {
     if (!text.trim()) return;

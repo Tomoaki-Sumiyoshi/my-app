@@ -1,24 +1,17 @@
-import {
-  makeMessageQueryString,
-  makeReceiveMultipleApiResponse,
-} from '@portfolio-chat/zod-schema';
 import { useInfiniteQuery } from '@tanstack/react-query';
+import { fetchMessages } from '../libs/api-messages';
 
 export const useMessages = () => {
   return useInfiniteQuery({
     queryKey: ['messages'],
-    queryFn: async ({ pageParam = new Date() }) => {
-      const query = makeMessageQueryString({
+    queryFn: async ({ pageParam }) => {
+      const result = await fetchMessages({
         beforeAt: pageParam,
-        limit: 10,
+        limit: 20,
       });
-      const url = `/api/chat/messages?${query}`;
-      const res = await fetch(url);
-      const result = makeReceiveMultipleApiResponse(await res.json());
-
-      return result.success ? result.data : [];
+      return result;
     },
-    getNextPageParam: (lastPage) => lastPage[0]?.createdAt,
+    getNextPageParam: (lastPage) => lastPage[lastPage.length - 1]?.createdAt,
     initialPageParam: new Date(),
   });
 };

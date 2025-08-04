@@ -1,36 +1,37 @@
 import { toast } from 'react-hot-toast';
 
+import { Message } from '@portfolio-chat/prisma-client';
 import {
-  makeReceiveSingleApiResponse,
-  MessageBody,
-} from '@portfolio-chat/zod-schema';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+  InfiniteData,
+  useMutation,
+  useQueryClient,
+} from '@tanstack/react-query';
 
-import { useMessageStore } from '../store/messageStore';
-
-const mutationFn = async (content: string) => {
-  const { userId, setUserId } = useMessageStore.getState();
-  const body: MessageBody = {
-    content,
-    ...(userId !== '' && { userId }),
-  };
-  const res = await fetch('/api/chat/messages', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body),
-  });
-  const result = makeReceiveSingleApiResponse(await res.json());
-  if (!result.success) throw new Error(result.error.message);
-  if (result.data.userId !== userId) setUserId(result.data.userId);
-  return result.data;
-};
+import { postMessage } from '../libs/api-messages';
+import { useScrollStore } from '../store/scrollStore';
 
 export const useSendMessage = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['messages'] });
+    mutationFn: postMessage,
+    onSuccess: (newMessage) => {
+      if (!newMessage) return;
+      const { scrollToBottom } = useScrollStore.getState();
+
+      queryClient.setQueryData(
+        ['messages'],
+        (oldData: InfiniteData<Message[]>) => {
+          if (!oldData) return oldData;
+          return {
+            ...oldData,
+            ...(newMessage && {
+              pages: [[newMessage], ...oldData.pages],
+            }),
+            pageParams: oldData.pageParams,
+          };
+        }
+      );
+      scrollToBottom();
     },
     onError: (error: unknown) => {
       const message = error instanceof Error ? error.message : '不明なエラー';

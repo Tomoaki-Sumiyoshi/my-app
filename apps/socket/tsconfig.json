@@ -1,6 +1,9 @@
 {
   "extends": "../../tsconfig.base.json",
-  "references": [{ "path": "../../packages/redis-client" }],
+  "references": [
+    { "path": "../../packages/redis-client" },
+    { "path": "../../packages/zod-schema" }
+  ],
   "compilerOptions": {
     "outDir": "dist",
     "rootDir": "src",

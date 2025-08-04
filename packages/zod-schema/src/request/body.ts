@@ -14,6 +14,7 @@ export const messageBodySchema = z.object({
     .refine((value) => value.trim().length > 0, {
       message: '空白のみのメッセージは無効です',
     }),
+  createdAt: z.date().optional(),
 });
 
 export type MessageBody = z.infer<typeof messageBodySchema>;

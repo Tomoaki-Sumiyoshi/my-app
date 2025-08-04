@@ -1,7 +1,8 @@
 import { getRedisClient } from '@portfolio-chat/redis-client';
+import { UserInserted } from '@portfolio-chat/zod-schema';
 
-import { getWebSocketServer } from './libs/web-socket-server.js';
 import { isRateLimited } from './libs/rate-limit.js';
+import { getWebSocketServer } from './libs/web-socket-server.js';
 
 const wss = getWebSocketServer();
 
@@ -17,10 +18,15 @@ wss.on('connection', (ws, req) => {
 });
 
 const redis = getRedisClient();
-redis.subscribe('chat:new-userId', (message: string) => {
+redis.subscribe('chat:new-userId', (userId: string) => {
   wss.clients.forEach((client) => {
     if (client.readyState === client.OPEN) {
-      client.send(message);
+      const sendMessage: UserInserted = {
+        type: 'USER_INSERTED',
+        payload: { userId },
+        createdAt: new Date().toISOString(),
+      };
+      client.send(JSON.stringify(sendMessage));
     }
   });
 });

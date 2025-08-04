@@ -1,31 +1,19 @@
-'use client';
-
-import { ChatInput } from '../../components/ChatInput';
-import { MessageList } from '../../components/MessageList';
-import { MessageScrollArea } from '../../components/MessageScrollArea';
-import { ScrollToBottomButton } from '../../components/ScrollToBottomButton';
-import { useMessages } from '../../hooks/useMessages';
-import { useScroll } from '../../hooks/useScroll';
-import { useSocket } from '../../hooks/useSocket';
+import { InitializeProvider } from '../../components/provider/InitializeProvider';
+import { ChatInput } from '../../components/ui/ChatInput';
+import { MessageList } from '../../components/ui/MessageList';
+import { MessageScrollContainer } from '../../components/ui/MessageScrollContainer';
+import { ScrollToBottomButton } from '../../components/ui/ScrollToBottomButton';
 
 export default function ChatPage() {
-  useSocket();
-  const { data } = useMessages();
-
-  const messages = data?.pages.flat() ?? [];
-  const onScroll = useScroll();
-
-  const scrollToBottom = () => {
-    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-  };
-
   return (
-    <div className="flex flex-col h-screen bg-gray-100">
-      <MessageScrollArea onScroll={onScroll}>
-        <MessageList messages={messages} />
-      </MessageScrollArea>
-      <ScrollToBottomButton onClick={scrollToBottom} />
-      <ChatInput />
-    </div>
+    <InitializeProvider>
+      <div className="flex flex-col h-screen bg-gray-100">
+        <MessageScrollContainer>
+          <MessageList />
+        </MessageScrollContainer>
+        <ScrollToBottomButton />
+        <ChatInput />
+      </div>
+    </InitializeProvider>
   );
 }

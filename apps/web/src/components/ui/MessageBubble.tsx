@@ -1,11 +1,11 @@
 import { Message } from '@portfolio-chat/prisma-client';
 
-import { useMessageStore } from '../store/messageStore';
+import { useUserStore } from '../../store/userStore';
 
 type Props = { message: Message };
 
 export const MessageBubble = ({ message }: Props) => {
-  const { userId } = useMessageStore();
+  const { userId } = useUserStore();
   const isMine = userId === message.userId;
 
   return (

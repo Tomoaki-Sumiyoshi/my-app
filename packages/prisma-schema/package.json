@@ -5,16 +5,22 @@
   "type": "module",
   "types": "dist/index.d.ts",
   "prisma": {
-    "schema": "prisma/schema.prisma"
+    "schema": "prisma/schema.prisma",
+    "seed": "tsx src/seed.ts"
   },
   "scripts": {
     "generate": "prisma generate",
-    "migrate:dev": "prisma migrate dev --schema=./prisma/schema.prisma",
+    "migrate:dev": "prisma migrate dev reset --schema=./prisma/schema.prisma",
     "migrate:deploy": "dotenv -e ./.env.production -- prisma migrate deploy --schema=./prisma/schema.prisma"
   },
   "devDependencies": {
-    "@prisma/client": "^6.12.0",
+    "@portfolio-chat/prisma-client": "workspace:*",
+    "@portfolio-chat/zod-schema": "workspace:*",
+    "@prisma/client": "^6.13.0",
+    "typescript": "^5.8.3",
+    "@types/node": "^20.19.9",
     "dotenv-cli": "^10.0.0",
-    "prisma": "^6.12.0"
+    "prisma": "^6.13.0",
+    "tsx": "^4.20.3"
   }
 }

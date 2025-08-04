@@ -24,7 +24,7 @@ export const getMessageList = async (req: Request, res: Response) => {
     },
     take: limit,
     orderBy: {
-      createdAt: 'asc',
+      createdAt: 'desc',
     },
   });
 
