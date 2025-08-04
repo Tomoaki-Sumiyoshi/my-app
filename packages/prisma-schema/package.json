@@ -6,7 +6,7 @@
   "types": "dist/index.d.ts",
   "prisma": {
     "schema": "prisma/schema.prisma",
-    "seed": "tsx src/seed.ts"
+    "seed": "tsx prisma/seed.ts"
   },
   "scripts": {
     "generate": "prisma generate",
