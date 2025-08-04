@@ -1,17 +1,20 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
-import { fetchMessages } from '../libs/api-messages';
+import { useEffect, useMemo } from 'react';
+import { useInfiniteMessages } from './useInfiniteMessages';
+import { useScrollControll } from './useScrollControll';
 
 export const useMessages = () => {
-  return useInfiniteQuery({
-    queryKey: ['messages'],
-    queryFn: async ({ pageParam }) => {
-      const result = await fetchMessages({
-        beforeAt: pageParam,
-        limit: 20,
-      });
-      return result;
-    },
-    getNextPageParam: (lastPage) => lastPage[lastPage.length - 1]?.createdAt,
-    initialPageParam: new Date(),
-  });
+  const { data } = useInfiniteMessages();
+
+  const reversedItems = useMemo(() => {
+    const joinedList = [...(data?.pages.flat() ?? [])].reverse();
+    const joinedMap = new Map(joinedList.map((item) => [item.messageId, item]));
+
+    return [...joinedMap.values()];
+  }, [data?.pages]);
+
+  useEffect(() => {
+    useScrollControll().handleScrollMode();
+  }, [reversedItems]);
+
+  return { reversedItems };
 };

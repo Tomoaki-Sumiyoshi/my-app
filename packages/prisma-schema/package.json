@@ -11,16 +11,17 @@
   "scripts": {
     "generate": "prisma generate",
     "migrate:dev": "prisma migrate dev reset --schema=./prisma/schema.prisma",
-    "migrate:deploy": "dotenv -e ./.env.production -- prisma migrate deploy --schema=./prisma/schema.prisma"
+    "migrate:deploy": "dotenv -e ./.env.production -- prisma migrate deploy --schema=./prisma/schema.prisma",
+    "build": "tsc --build"
   },
   "devDependencies": {
-    "@portfolio-chat/prisma-client": "workspace:*",
-    "@portfolio-chat/zod-schema": "workspace:*",
-    "@prisma/client": "^6.13.0",
-    "typescript": "^5.8.3",
     "@types/node": "^20.19.9",
     "dotenv-cli": "^10.0.0",
     "prisma": "^6.13.0",
-    "tsx": "^4.20.3"
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.13.0"
   }
 }

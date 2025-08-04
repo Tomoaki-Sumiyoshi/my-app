@@ -1,6 +1,6 @@
 import { toast } from 'react-hot-toast';
 
-import { Message } from '@portfolio-chat/prisma-client';
+import { Message } from '@portfolio-chat/prisma-schema';
 import {
   InfiniteData,
   useMutation,
@@ -16,8 +16,8 @@ export const useSendMessage = () => {
     mutationFn: postMessage,
     onSuccess: (newMessage) => {
       if (!newMessage) return;
-      const { scrollToBottom } = useScrollStore.getState();
-
+      const { setScrollMode } = useScrollStore.getState();
+      setScrollMode('forceScrollBottom');
       queryClient.setQueryData(
         ['messages'],
         (oldData: InfiniteData<Message[]>) => {
@@ -31,7 +31,6 @@ export const useSendMessage = () => {
           };
         }
       );
-      scrollToBottom();
     },
     onError: (error: unknown) => {
       const message = error instanceof Error ? error.message : '不明なエラー';

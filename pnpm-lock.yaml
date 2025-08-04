@@ -20,9 +20,9 @@ importers:
 
   apps/api:
     dependencies:
-      '@portfolio-chat/prisma-client':
+      '@portfolio-chat/prisma-schema':
         specifier: workspace:*
-        version: link:../../packages/prisma-client
+        version: link:../../packages/prisma-schema
       '@portfolio-chat/redis-client':
         specifier: workspace:*
         version: link:../../packages/redis-client
@@ -79,9 +79,9 @@ importers:
 
   apps/web:
     dependencies:
-      '@portfolio-chat/prisma-client':
+      '@portfolio-chat/prisma-schema':
         specifier: workspace:*
-        version: link:../../packages/prisma-client
+        version: link:../../packages/prisma-schema
       '@portfolio-chat/zod-schema':
         specifier: workspace:*
         version: link:../../packages/zod-schema
@@ -123,23 +123,12 @@ importers:
         specifier: ^5
         version: 5.8.3
 
-  packages/prisma-client:
-    devDependencies:
-      typescript:
-        specifier: ^5.8.3
-        version: 5.8.3
-
   packages/prisma-schema:
-    devDependencies:
-      '@portfolio-chat/prisma-client':
-        specifier: workspace:*
-        version: link:../prisma-client
-      '@portfolio-chat/zod-schema':
-        specifier: workspace:*
-        version: link:../zod-schema
+    dependencies:
       '@prisma/client':
         specifier: ^6.13.0
         version: 6.13.0(prisma@6.13.0(typescript@5.8.3))(typescript@5.8.3)
+    devDependencies:
       '@types/node':
         specifier: ^20.19.9
         version: 20.19.9
@@ -168,9 +157,9 @@ importers:
 
   packages/zod-schema:
     dependencies:
-      '@portfolio-chat/prisma-client':
+      '@portfolio-chat/prisma-schema':
         specifier: workspace:*
-        version: link:../prisma-client
+        version: link:../prisma-schema
       zod:
         specifier: ^4.0.10
         version: 4.0.10

@@ -10,7 +10,6 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "@portfolio-chat/prisma-client": ["packages/prisma-client/src"],
       "@portfolio-chat/prisma-schema": ["packages/prisma-schema/src"],
       "@portfolio-chat/redis-client": ["packages/redis-client/src"],
       "@portfolio-chat/zod-schema": ["packages/zod-schema"]

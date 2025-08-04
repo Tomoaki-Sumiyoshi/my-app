@@ -1,7 +1,7 @@
 {
   "extends": "../../tsconfig.base.json",
   "references": [
-    { "path": "../../packages/prisma-client" },
+    { "path": "../../packages/prisma-schema" },
     { "path": "../../packages/redis-client" },
     { "path": "../../packages/zod-schema" }
   ],

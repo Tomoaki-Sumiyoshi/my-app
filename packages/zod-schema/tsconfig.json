@@ -1,6 +1,6 @@
 {
   "extends": "../../tsconfig.base.json",
-  "references": [{ "path": "../../packages/prisma-client" }],
+  "references": [{ "path": "../../packages/prisma-schema" }],
   "compilerOptions": {
     "outDir": "dist",
     "rootDir": "src",

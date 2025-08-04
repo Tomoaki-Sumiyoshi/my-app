@@ -2,6 +2,7 @@ import { RefObject } from 'react';
 import { create } from 'zustand';
 
 type ScrollPosition = 'top' | 'middle' | 'bottom';
+type ScrollMode = 'keepScrollPosition' | 'scrollBottom' | 'forceScrollBottom';
 
 type ScrollState = {
   scrollPosition: ScrollPosition;
@@ -9,8 +10,9 @@ type ScrollState = {
   scrollRef: RefObject<HTMLDivElement | null> | null;
   setScrollRef: (ref: RefObject<HTMLDivElement | null>) => void;
   prevScrollHeight: number;
-  scrollTo: (diff?: number) => void;
-  scrollToBottom: () => void;
+  setPrevScrollHeight: (height: number) => void;
+  scrollMode: ScrollMode;
+  setScrollMode: (mode: ScrollMode) => void;
 };
 
 export const useScrollStore = create<ScrollState>((set, get) => ({
@@ -20,18 +22,7 @@ export const useScrollStore = create<ScrollState>((set, get) => ({
     set({ scrollPosition: position }),
   setScrollRef: (ref) => set({ scrollRef: ref }),
   prevScrollHeight: 0,
-  scrollTo: (diff = get().prevScrollHeight) => {
-    const element = get().scrollRef?.current;
-    if (!element) return;
-
-    requestAnimationFrame(() => {
-      console.log(diff);
-      element.scrollTo({
-        top: element.scrollHeight - diff,
-        behavior: 'auto',
-      });
-      set({ prevScrollHeight: element.scrollHeight });
-    });
-  },
-  scrollToBottom: () => get().scrollTo(0),
+  setPrevScrollHeight: (height) => set({ prevScrollHeight: height }),
+  scrollMode: 'forceScrollBottom',
+  setScrollMode: (mode) => set({ scrollMode: mode }),
 }));

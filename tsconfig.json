@@ -5,7 +5,6 @@
     { "path": "apps/web" },
     { "path": "apps/socket" },
     { "path": "packages/prisma-schema" },
-    { "path": "packages/prisma-client" },
     { "path": "packages/redis-client" },
     { "path": "packages/zod-schema" }
   ],

@@ -1,4 +1,4 @@
-import { Message } from '@portfolio-chat/prisma-client';
+import { Message } from '@portfolio-chat/prisma-schema';
 
 import { useUserStore } from '../../store/userStore';
 

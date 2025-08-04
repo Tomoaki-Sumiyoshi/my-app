@@ -18,7 +18,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^5.1.0",
-    "@portfolio-chat/prisma-client": "workspace:*",
+    "@portfolio-chat/prisma-schema": "workspace:*",
     "@portfolio-chat/redis-client": "workspace:*",
     "@portfolio-chat/zod-schema": "workspace:*"
   }

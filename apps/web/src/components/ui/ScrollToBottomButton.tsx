@@ -1,14 +1,13 @@
 'use client';
 
-import { useCallback } from 'react';
-
+import { useScrollControll } from '../../hooks/useScrollControll';
 import { useScrollStore } from '../../store/scrollStore';
 
 export const ScrollToBottomButton = () => {
-  const { scrollPosition, scrollToBottom } = useScrollStore();
+  const { scrollPosition } = useScrollStore();
   if (scrollPosition === 'bottom') return null;
 
-  const onClick = () => scrollToBottom();
+  const onClick = () => useScrollControll().forceScrollToBottom();
 
   return (
     <button

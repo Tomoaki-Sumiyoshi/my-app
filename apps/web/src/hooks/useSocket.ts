@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { Message } from '@portfolio-chat/prisma-client';
+import { Message } from '@portfolio-chat/prisma-schema';
 import { userInsertedSchema } from '@portfolio-chat/zod-schema';
 import { InfiniteData, useQueryClient } from '@tanstack/react-query';
 
@@ -8,13 +8,13 @@ import { fetchMessages } from '../libs/api-messages';
 import { useConnectionStore } from '../store/connectionStore';
 import { useScrollStore } from '../store/scrollStore';
 import { useUserStore } from '../store/userStore';
-import { useMessages } from './useMessages';
+import { useInfiniteMessages } from './useInfiniteMessages';
 
 export const useSocket = () => {
   const { setSocketConnected } = useConnectionStore();
   const { userId } = useUserStore.getState();
   const queryClient = useQueryClient();
-  const { data } = useMessages();
+  const { data } = useInfiniteMessages();
 
   useEffect(() => {
     const socket = new WebSocket(
@@ -27,11 +27,12 @@ export const useSocket = () => {
       const parsed = userInsertedSchema.safeParse(JSON.parse(event.data));
       if (!parsed.success || userId === parsed.data.payload.userId) return;
 
-      const { scrollToBottom } = useScrollStore.getState();
+      const { setScrollMode } = useScrollStore.getState();
 
       const newMessages = await fetchMessages({
         afterAt: data?.pages[0][0]?.createdAt,
       });
+      setScrollMode('scrollBottom');
       queryClient.setQueryData(
         ['messages'],
         (oldData: InfiniteData<Message[]>) => {
@@ -45,7 +46,6 @@ export const useSocket = () => {
           };
         }
       );
-      scrollToBottom();
     };
 
     return () => socket.close();

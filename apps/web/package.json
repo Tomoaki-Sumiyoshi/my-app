@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@portfolio-chat/prisma-client": "workspace:*",
+    "@portfolio-chat/prisma-schema": "workspace:*",
     "@portfolio-chat/zod-schema": "workspace:*",
     "@tanstack/react-query": "^5.83.0",
     "next": "15.4.4",

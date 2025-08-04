@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import { prisma } from '@portfolio-chat/prisma-client';
+import { prisma } from '@portfolio-chat/prisma-schema';
 import {
   errorMap,
   makeSendMultipleApiResponse,

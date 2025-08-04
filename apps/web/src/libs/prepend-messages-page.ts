@@ -1,4 +1,4 @@
-import { Message } from '@portfolio-chat/prisma-client';
+import { Message } from '@portfolio-chat/prisma-schema';
 import { InfiniteData, useQueryClient } from '@tanstack/react-query';
 
 export const prependMessagesPage = (newMessages: Message[]) => {
