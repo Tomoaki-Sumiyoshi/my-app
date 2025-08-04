@@ -13,7 +13,7 @@ export const MessageScrollContainer = ({ children }: Props) => {
 
   return (
     <div
-      className="flex-1 overflow-y-auto px2 py-4 bg-gray-100"
+      className="flex-1 overflow-y-auto px2 py-4 bg-blue-100"
       ref={scrollRef}
     >
       {children}

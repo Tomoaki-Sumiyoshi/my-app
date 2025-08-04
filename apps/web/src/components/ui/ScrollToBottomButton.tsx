@@ -10,11 +10,13 @@ export const ScrollToBottomButton = () => {
   const onClick = () => useScrollControll().forceScrollToBottom();
 
   return (
-    <button
-      className="fixed bottom-20 right-6 bg-blue-500 text-white rounded-full p-2 shadow-lg animate-bounce"
-      onClick={onClick}
-    >
-      ↓
-    </button>
+    <div className="flex justify-center">
+      <button
+        className="fixed bottom-20 bg-white text-black rounded-full p-2 shadow-lg animate-bounce"
+        onClick={onClick}
+      >
+        ↓
+      </button>
+    </div>
   );
 };

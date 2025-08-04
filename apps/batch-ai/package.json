@@ -1,0 +1,26 @@
+{
+  "name": "batch-ai",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "type": "module",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "build": "tsc --build",
+    "start": "node dist/index.js"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@portfolio-chat/prisma-schema": "workspace:*",
+    "@portfolio-chat/redis-client": "workspace:*",
+    "@portfolio-chat/zod-schema": "workspace:*",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "openai": "^5.11.0"
+  }
+}
