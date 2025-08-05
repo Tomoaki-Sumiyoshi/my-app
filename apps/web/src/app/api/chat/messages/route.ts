@@ -8,11 +8,10 @@ import {
   makeReceiveSingleApiResponse,
   makeSendMultipleApiResponse,
   makeSendSingleApiResponse,
-  messageBodySchema,
   messageQuerySchema,
 } from '@portfolio-chat/zod-schema';
 
-const API_URL = `${process.env.API_URL || 'http://localhost:3001'}/messages`;
+const API_URL = `${process.env.API_URL || 'http://localhost:3001/'}messages`;
 
 export const GET = async (req: NextRequest) => {
   const params = req.nextUrl.searchParams;
@@ -33,6 +32,7 @@ export const GET = async (req: NextRequest) => {
 
   const queryString = makeMessageQueryString(safeQuery.data);
   const url = `${API_URL}?${queryString}`;
+
   const res = await fetch(url);
   const result = makeReceiveMultipleApiResponse(await res.json());
   if (result.success) {

@@ -13,6 +13,7 @@
     "clean-install": "pnpm run clean && pnpm install --filter=@portfolio-chat/prisma-schema... && pnpm run generate && pnpm install"
   },
   "devDependencies": {
+    "@flydotio/dockerfile": "^0.7.10",
     "ts-node": "^10.9.2",
     "turbo": "^2.5.5",
     "typescript": "^5.8.3"
