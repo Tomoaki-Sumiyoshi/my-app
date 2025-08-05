@@ -4,20 +4,37 @@ const redisUrl = process.env.REDIS_URL || 'redis://localhost:6379';
 
 type CreateClientType = ReturnType<typeof createClient>;
 
-let client: CreateClientType | null = null;
+type RedisRole = 'publisher' | 'subscriber';
 
-export const getRedisClient = (): CreateClientType => {
-  if (!client) {
-    client = createClient({ url: redisUrl });
+const clients: Record<RedisRole, CreateClientType | null> = {
+  publisher: null,
+  subscriber: null,
+};
+
+export const getRedisClient = (
+  role: RedisRole = 'publisher'
+): CreateClientType => {
+  if (!clients[role]) {
+    const isTsl = redisUrl.startsWith('rediss://');
+    const client = createClient({
+      url: redisUrl,
+      ...(isTsl && {
+        socket: {
+          tls: true,
+        },
+      }),
+    });
 
     client.on('error', (err) => {
-      console.error('[Redis Error]', err);
+      console.error(`[Redis ${role} Error]`, err);
     });
 
     client.connect().catch((err) => {
-      console.error('[Redis Connect Error]', err);
+      console.error(`[Redis ${role} Connect Error]`, err);
     });
+
+    clients[role] = client;
   }
 
-  return client;
+  return clients[role]!;
 };

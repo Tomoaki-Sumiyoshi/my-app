@@ -11,7 +11,7 @@ export const MessageBubble = ({ message }: Props) => {
   return (
     <div className={`flex ${isMine ? 'justify-end' : 'justify-start'} mb-2`}>
       <div
-        className={`rounded-x1 p-2 max-w-xs ${
+        className={`rounded-x1 p-2 max-w-[60%] ${
           isMine ? 'bg-green-300' : message.isAi ? 'bg-red-300' : 'bg-white'
         }`}
       >

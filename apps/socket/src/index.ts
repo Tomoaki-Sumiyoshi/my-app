@@ -17,8 +17,8 @@ wss.on('connection', (ws, req) => {
   ws.close();
 });
 
-const redis = getRedisClient();
-redis.subscribe('chat:new-userId', (userId: string) => {
+const subscriber = getRedisClient('subscriber');
+subscriber.subscribe('chat:new-userId', (userId: string) => {
   wss.clients.forEach((client) => {
     if (client.readyState === client.OPEN) {
       const sendMessage: UserInserted = {

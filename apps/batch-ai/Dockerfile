@@ -3,7 +3,7 @@ FROM node:20-alpine AS base
 WORKDIR /app
 RUN npm install -g pnpm@8.15.4
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml turbo.json tsconfig.base.json ./
-COPY apps/socket ./apps/socket
+COPY apps/batch-ai ./apps/batch-ai
 COPY packages ./packages
 
 # -------- install db only (prisma generate) --------
@@ -12,8 +12,8 @@ FROM base AS build
 RUN pnpm install --filter=@portfolio-chat/prisma-schema...
 # prisma generate
 RUN pnpm run generate
-RUN pnpm install --frozen-lockfile --filter=socket...
-RUN pnpm run build --filter=socket...
+RUN pnpm install --frozen-lockfile --filter=batch-ai...
+RUN pnpm run build --filter=batch-ai...
 RUN pnpm prune --prod
 
 # -------- production --------
@@ -24,9 +24,9 @@ ENV NODE_ENV=production
 # 必要なファイルだけをコピー
 COPY --from=build /app/node_modules ./node_modules
 
-COPY --from=build /app/apps/socket/dist ./apps/socket/dist
-COPY --from=build /app/apps/socket/package.json ./apps/socket/package.json
-COPY --from=build /app/apps/socket/node_modules ./apps/socket/node_modules
+COPY --from=build /app/apps/batch-ai/dist ./apps/batch-ai/dist
+COPY --from=build /app/apps/batch-ai/package.json ./apps/batch-ai/package.json
+COPY --from=build /app/apps/batch-ai/node_modules ./apps/batch-ai/node_modules
 
 COPY --from=build /app/packages/prisma-schema/dist ./packages/prisma-schema/dist
 COPY --from=build /app/packages/prisma-schema/package.json ./packages/prisma-schema/package.json
@@ -40,4 +40,4 @@ COPY --from=build /app/packages/zod-schema/dist ./packages/zod-schema/dist
 COPY --from=build /app/packages/zod-schema/package.json ./packages/zod-schema/package.json
 COPY --from=build /app/packages/zod-schema/node_modules ./packages/zod-schema/node_modules
 
-CMD ["node", "apps/socket/dist/index.js"]
+CMD ["node", "apps/batch-ai/dist/index.js"]

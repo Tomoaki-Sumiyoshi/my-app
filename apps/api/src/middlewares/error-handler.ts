@@ -9,6 +9,7 @@ export const errorHandler = (
   next: NextFunction
 ) => {
   const error = errorMap.UNKNOWN;
+  console.log(err);
   const response: FailureResponse = {
     success: false,
     error,

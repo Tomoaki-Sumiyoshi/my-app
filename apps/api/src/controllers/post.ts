@@ -25,8 +25,8 @@ export const postMessage = async (req: Request, res: Response) => {
     return res.status(response.error.status).json(response);
   }
 
-  const redis = getRedisClient();
-  redis.publish('chat:new-userId', response.data.userId);
-  redis.publish('chat:new-message', response.data.content);
+  const publisher = getRedisClient('publisher');
+  publisher.publish('chat:new-userId', response.data.userId);
+  publisher.publish('chat:new-message', response.data.content);
   return res.status(200).json(response);
 };

@@ -27,5 +27,5 @@ app.use('/messages', messageRouter);
 app.use(errorHandler);
 
 app.listen(port, host, () => {
-  console.log(`${port}called`);
+  console.log(`${host}${port}called`);
 });

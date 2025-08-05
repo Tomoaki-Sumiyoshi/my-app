@@ -6,12 +6,13 @@
   "types": "dist/index.d.ts",
   "prisma": {
     "schema": "prisma/schema.prisma",
-    "seed": "tsx prisma/seed.ts"
+    "seed": "tsx src/seed.ts"
   },
   "scripts": {
     "generate": "prisma generate",
     "migrate:dev": "prisma migrate dev reset --schema=./prisma/schema.prisma",
     "migrate:deploy": "dotenv -e ./.env.production -- prisma migrate deploy --schema=./prisma/schema.prisma",
+    "seed:dev": "prisma db seed",
     "build": "tsc --build"
   },
   "devDependencies": {

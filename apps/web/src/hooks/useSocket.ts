@@ -28,7 +28,6 @@ export const useSocket = () => {
       if (!parsed.success || userId === parsed.data.payload.userId) return;
 
       const { setScrollMode } = useScrollStore.getState();
-
       const newMessages = await fetchMessages({
         afterAt: data?.pages[0][0]?.createdAt,
       });

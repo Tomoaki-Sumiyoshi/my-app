@@ -1,6 +1,7 @@
 import { useEffect, useMemo } from 'react';
 import { useInfiniteMessages } from './useInfiniteMessages';
 import { useScrollControll } from './useScrollControll';
+import { useScrollStore } from '../store/scrollStore';
 
 export const useMessages = () => {
   const { data } = useInfiniteMessages();
@@ -13,7 +14,10 @@ export const useMessages = () => {
   }, [data?.pages]);
 
   useEffect(() => {
+    const { scrollRef, setPrevScrollHeight } = useScrollStore.getState();
+
     useScrollControll().handleScrollMode();
+    setPrevScrollHeight(scrollRef?.current?.scrollHeight ?? 0);
   }, [reversedItems]);
 
   return { reversedItems };

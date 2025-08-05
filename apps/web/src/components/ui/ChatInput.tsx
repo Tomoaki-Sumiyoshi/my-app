@@ -17,9 +17,9 @@ export const ChatInput = () => {
   };
 
   return (
-    <div className="flex p-2 bg-blue-100">
+    <div className="flex p-2 bg-white">
       <input
-        className="flex-1 border bg-white rounded-1 px-2 py-1"
+        className="flex-1 border bg-gray-100 rounded-1 px-2 py-1"
         value={text}
         onChange={(e) => setText(e.target.value)}
         onKeyDown={(e) => e.key === 'Enter' && onSend()}

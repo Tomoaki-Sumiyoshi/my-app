@@ -1,13 +1,8 @@
 import { useScrollStore } from '../store/scrollStore';
 
 export const useScrollControll = () => {
-  const {
-    scrollPosition,
-    scrollMode,
-    scrollRef,
-    prevScrollHeight,
-    setPrevScrollHeight,
-  } = useScrollStore.getState();
+  const { scrollPosition, scrollMode, scrollRef, prevScrollHeight } =
+    useScrollStore.getState();
 
   const keepScrollPosition = (diff = prevScrollHeight, isSmooth = false) => {
     const element = scrollRef?.current;
@@ -17,7 +12,6 @@ export const useScrollControll = () => {
       top: element.scrollHeight - diff,
       behavior: isSmooth ? 'smooth' : 'auto',
     });
-    setPrevScrollHeight(element.scrollHeight);
   };
 
   const forceScrollToBottom = (isSmooth = false) => {
@@ -25,9 +19,9 @@ export const useScrollControll = () => {
   };
 
   const scrollToBottom = (isSmooth = false) => {
-    if (scrollPosition !== 'bottom') return;
-
-    forceScrollToBottom(isSmooth);
+    if (scrollPosition === 'bottom') {
+      forceScrollToBottom(isSmooth);
+    }
   };
 
   const handleScrollMode = () => {

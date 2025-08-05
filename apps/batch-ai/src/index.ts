@@ -7,8 +7,9 @@ const MAX_MESSAGES = 10;
 
 const main = async () => {
   let messageList: string[] = [];
-  const redis = getRedisClient();
-  await redis.subscribe('chat:new-message', async (message) => {
+  const subscriber = getRedisClient('subscriber');
+  const publisher = getRedisClient('publisher');
+  subscriber.subscribe('chat:new-message', async (message: string) => {
     messageList.push(message);
     if (Math.random() > messageList.length / MAX_MESSAGES) return;
 
@@ -18,10 +19,11 @@ const main = async () => {
     const { userId } = await prisma.message.create({
       data: {
         content: response,
+        isAi: true,
       },
     });
 
-    redis.publish('chat:new-userId', userId);
+    publisher.publish('chat:new-userId', userId);
     messageList = [];
   });
 };
