@@ -11,14 +11,14 @@ export const useMessages = () => {
     const joinedMap = new Map(joinedList.map((item) => [item.messageId, item]));
 
     return [...joinedMap.values()];
-  }, [data?.pages]);
+  }, [data?.pages?.length]);
 
   useEffect(() => {
     const { scrollRef, setPrevScrollHeight } = useScrollStore.getState();
 
     useScrollControll().handleScrollMode();
     setPrevScrollHeight(scrollRef?.current?.scrollHeight ?? 0);
-  }, [reversedItems]);
+  }, [reversedItems.length]);
 
   return { reversedItems };
 };
